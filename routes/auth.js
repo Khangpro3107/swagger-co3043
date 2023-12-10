@@ -4,12 +4,19 @@ const router = Router();
 /**
  * @swagger
  * /auth/login:
- *   get:
+ *   post:
  *     description: Login
  *     tags:
  *       - auth
- *     produces:
- *       - application/json
+ *     parameters:
+ *       - in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/User'
+ *         examples:
+ *           value:
+ *             username: john.doe
+ *             password: 123456
  *     responses:
  *       200:
  *         description: Login successful

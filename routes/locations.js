@@ -25,11 +25,18 @@ router.get("/all", (req, res) => {
  * @swagger
  * /locations/location/{id}:
  *   get:
- *     description: Get a single location by id
+ *     description: Get a single location by id ("1", "2", or "3")
  *     tags:
  *       - locations
  *     produces:
  *       - application/json
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID of the location ("1", "2", or "3")
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: Return the found location
@@ -40,7 +47,7 @@ router.get("/all", (req, res) => {
  */
 router.get("/location/:id", (req, res) => {
   // TODO: implement get location by id
-  res.send("<b>/locations/location/{id}</b> works");
+  res.send(`<b>/locations/location/${req.params.id}</b> works`);
 });
 
 export default router;

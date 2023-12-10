@@ -1,0 +1,28 @@
+{
+  "locations": [
+    {
+      "id": "1",
+      "name": "HCMUT",
+      "image": "https://hcmut.edu.vn/img/carouselItem/36986508.jpeg?t=36986508",
+      "description": "The absolute number ONE technology-engineering college in Southern Vietnam",
+      "address": "https://maps.app.goo.gl/W3PxHFWG3ePF3Dmu9",
+      "extra": "The atmosphere is relaxing, chill and friendly"
+    },
+    {
+      "id": "2",
+      "name": "HCMUS",
+      "image": "https://en.hcmus.edu.vn/wp-content/uploads/2023/08/bn2-1.jpg",
+      "description": "HCMUS's description here",
+      "address": "https://maps.app.goo.gl/UZEm6UKHMpR28KKU6",
+      "extra": "Absolutely nothing"
+    },
+    {
+      "id": "3",
+      "name": "HCMIU",
+      "image": "https://dean1665.vn/uploads/school/dhqt-dhqg_hcm.jpg",
+      "description": "HCMIU's description here",
+      "address": "https://maps.app.goo.gl/81cnsAD4RCN4M7Tu8",
+      "extra": "Absolutely nothing"
+    }
+  ]
+}

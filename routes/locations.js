@@ -1,4 +1,7 @@
 import { Router } from "express";
+import { promises as fs } from 'fs';  // Sử dụng promises từ fs
+import path from 'path';
+import { fileURLToPath } from 'url';
 const router = Router();
 
 /**
@@ -16,9 +19,30 @@ const router = Router();
  *         schema:
  *           $ref: '#/definitions/Locations'
  */
-router.get("/all", (req, res) => {
-  // TODO: implement get all locations
-  res.send("<b>/locations/all</b> works");
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+async function readLocationsData() {
+  try {
+    const jsonPath = path.join(__dirname, '..', 'data', 'location.json');
+    const jsonData = await fs.readFile(jsonPath, 'utf8');
+    return JSON.parse(jsonData);
+  } catch (error) {
+    console.error("Error reading the locations data file:", error.message);
+    return null;
+  }
+}
+
+router.get("/all", async (req, res) => {
+  try {
+    const data = await readLocationsData();
+    if (data) {
+      res.json(data);
+    } else {
+      res.status(500).send("An error occurred while fetching locations data");
+    }
+  } catch (error) {
+    res.status(500).send("An error occurred while processing the request");
+  }
 });
 
 /**

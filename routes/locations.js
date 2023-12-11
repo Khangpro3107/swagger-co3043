@@ -1,4 +1,5 @@
 import { Router } from "express";
+import * as fs from 'fs';
 const router = Router();
 
 /**
@@ -45,9 +46,26 @@ router.get("/all", (req, res) => {
  *       404:
  *         description: Location with the specified id not found
  */
-router.get("/location/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   // TODO: implement get location by id
-  res.send(`<b>/locations/location/${req.params.id}</b> works`);
+  const data = JSON.parse(fs.readFileSync('./data/location.json', 'utf8'));
+  console.log(data);
+  const id = req.params.id;
+  const list = data['locations'];
+  var item = null;
+
+  for (let i = 0; i < list.length; i++){
+    if (list[i].id === id){
+      item = list[i];
+      break;
+    }
+  }
+
+  if (item) {
+    res.status(200).json(item);
+  } else {
+    res.status(404).json({ message: 'Location ID not found' });
+  }
 });
 
 export default router;

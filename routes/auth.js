@@ -33,7 +33,7 @@ const router = Router();
  *           $ref: '#/definitions/User'
  */
 router.post("/login", (req, res) => {
-  res.send("<b>/auth/login</b> works");
+  // res.send("<b>/auth/login</b> works");
 
   try {
     
@@ -41,41 +41,20 @@ router.post("/login", (req, res) => {
     console.log(userData);
 
     const _username = req.params['username'];
-
     const _password = req.params['password'];
-
     const list = userData['users'];
-    var item_username = null;
-    var item_password = null;
-  
     for (let i = 0; i < list.length; i++){
       if (list[i].username === _username){
-        item_username = list[i].username;
-        break;
+        if (list[i].password !== _password){
+          return res.status(401).json({ message: "Wrong password" });
+        }
+        return res.status(200).json({ message: "Login successful" });     
       }
     }
-
-    for (let i = 0; i < list.length; i++){
-      if (list[i].password === _password){
-        item_username = list[i].password;
-        break;
-      }
-    }
-    // Check if the provided username exists in the fetched data
-    if (item_password == null) {
-      return res.status(404).json({ message: "Username not exist" });
-    }
-
-    // Check if the provided password matches the fetched password
-    if (userData.password == null) {
-      return res.status(401).json({ message: "Wrong password" });
-    }
-
-    // username and password are correct
-    res.status(200).json({ message: "Login successful" });
+    return res.status(404).json({ message: "Username not exist" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 });
 

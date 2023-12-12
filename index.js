@@ -14,13 +14,13 @@ app.use("/api/auth", authRouter);
 app.use("/api/locations", locationsRouter);
 app.use("/api/docs", swagger);
 
-app.use("*", (req, res) => {
-  res.send("404 Not Found");
-});
+// app.use("*", (req, res) => {
+//   res.send("404 Not Found");
+// });
 
-app.use((err, req, res, next) => {
-  return res.json({ error: err.message });
-});
+// app.use((err, req, res, next) => {
+//   return res.json({ error: err.message });
+// });
 
 app.listen(5000, () => {
   console.log("Server listening on port 5000...");

@@ -33,8 +33,8 @@ router.post("/login", (req, res) => {
     const userData = JSON.parse(fs.readFileSync('./data/user.json', 'utf8'));
     console.log(userData);
 
-    const _username = req.params['username'];
-    const _password = req.params['password'];
+    const _username = req.body['username'];
+    const _password = req.body['password'];
     const list = userData['users'];
     for (let i = 0; i < list.length; i++){
       if (list[i].username === _username){

@@ -1,4 +1,5 @@
 import { Router } from "express";
+import fs from "fs"; // Import the fs module
 const router = Router();
 
 /**
@@ -32,8 +33,28 @@ const router = Router();
  *           $ref: '#/definitions/User'
  */
 router.post("/login", (req, res) => {
-  // TODO: implement login
-  res.send("<b>/auth/login</b> works");
+  try {
+    
+    const userData = JSON.parse(fs.readFileSync("data/user.json", "utf8"));
+
+    const { username, password } = req.body;
+
+    // Check if the provided username exists in the fetched data
+    if (userData.username !== username) {
+      return res.status(404).json({ message: "Username not exist" });
+    }
+
+    // Check if the provided password matches the fetched password
+    if (userData.password !== password) {
+      return res.status(401).json({ message: "Wrong password" });
+    }
+
+    // username and password are correct
+    res.status(200).json({ message: "Login successful" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 });
 
 export default router;

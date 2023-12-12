@@ -1,4 +1,4 @@
-import { Router } from "express"; Sử dụng promises từ fs
+import { Router } from "express";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import * as fs from 'fs';

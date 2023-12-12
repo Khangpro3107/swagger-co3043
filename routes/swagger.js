@@ -21,7 +21,7 @@ const options = {
         description: "Locations",
       },
     ],
-    schemes: ["http"],
+    schemes: ["https"],
     host: "localhost:5000",
     basePath: "/api",
   },

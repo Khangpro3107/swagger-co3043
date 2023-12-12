@@ -4,11 +4,13 @@ import bodyParser from "body-parser";
 import authRouter from "./routes/auth.js";
 import locationsRouter from "./routes/locations.js";
 import swagger from "./routes/swagger.js";
+import cors from "cors"
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());
 
 app.use("/api/auth", authRouter);
 app.use("/api/locations", locationsRouter);

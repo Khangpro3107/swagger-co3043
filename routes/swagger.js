@@ -22,7 +22,7 @@ const options = {
       },
     ],
     schemes: ["https"],
-    host: "localhost:5000",
+    host: "clis-swagger.onrender.com",
     basePath: "/api",
   },
   apis: ["./routes/*.js", "./models/*.js"],

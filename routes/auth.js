@@ -1,5 +1,5 @@
 import { Router } from "express";
-import fs from "fs"; // Import the fs module
+import fs from "fs";
 const router = Router();
 
 /**
@@ -11,6 +11,7 @@ const router = Router();
  *       - auth
  *     parameters:
  *       - in: body
+ *         name: user
  *         required: true
  *         schema:
  *           $ref: '#/definitions/User'
@@ -21,20 +22,12 @@ const router = Router();
  *     responses:
  *       200:
  *         description: Login successful
- *         schema:
- *           $ref: '#/definitions/User'
  *       404:
  *         description: Username not exist
- *         schema:
- *           $ref: '#/definitions/User'
  *       401:
  *         description: Wrong password
- *         schema:
- *           $ref: '#/definitions/User'
  */
 router.post("/login", (req, res) => {
-  // res.send("<b>/auth/login</b> works");
-
   try {
     
     const userData = JSON.parse(fs.readFileSync('./data/user.json', 'utf8'));

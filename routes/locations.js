@@ -19,31 +19,28 @@ const router = Router();
  *         schema:
  *           $ref: '#/definitions/Locations'
  */
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-async function readLocationsData() {
+router.get("/all", (req, res) => {
   try {
-    const jsonPath = path.join(__dirname, '..', 'data', 'location.json');
-    const jsonData = await fs.readFile(jsonPath, 'utf8');
-    return JSON.parse(jsonData);
-  } catch (error) {
-    console.error("Error reading the locations data file:", error.message);
-    return null;
-  }
-}
+    const filePath = path.join(path.dirname(fileURLToPath(import.meta.url)), '../data/location.json');
+    if (!fs.existsSync(filePath)) {
+      return res.status(404).json({ message: 'File location.json not found' });
+    }
 
-router.get("/all", async (req, res) => {
-  try {
-    const data = await readLocationsData();
-    if (data) {
-      res.json(data);
+    const fileData = fs.readFileSync(filePath, 'utf8');
+    const data = JSON.parse(fileData);
+    if (data && data.locations) {
+      res.status(200).json(data.locations);
+
     } else {
-      res.status(500).send("An error occurred while fetching locations data");
+      res.status(404).json({ message: 'No locations found in the file' });
     }
   } catch (error) {
-    res.status(500).send("An error occurred while processing the request");
+    console.error("Error occurred:", error);
+    res.status(500).json({ message: 'An error occurred while fetching locations data', error: error.message });
   }
 });
+
 
 /**
  * @swagger
@@ -77,8 +74,8 @@ router.get("/:id", (req, res) => {
   const list = data['locations'];
   var item = null;
 
-  for (let i = 0; i < list.length; i++){
-    if (list[i].id === id){
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].id === id) {
       item = list[i];
       break;
     }

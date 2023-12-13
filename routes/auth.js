@@ -6,7 +6,7 @@ const router = Router();
  * @swagger
  * /auth/login:
  *   post:
- *     description: Login (test data: [{"admin", "admin"}, {"manager", "manager"}])
+ *     description: Login (test data: "admin" - "admin", "manager" - "manager")
  *     tags:
  *       - auth
  *     parameters:

@@ -6,7 +6,7 @@ const router = Router();
  * @swagger
  * /auth/login:
  *   post:
- *     description: Login (test data: "admin" - "admin", "manager" - "manager")
+ *     description: Login ({username,password}:[{admin,admin},{manager-manager}])
  *     tags:
  *       - auth
  *     parameters:
@@ -29,19 +29,18 @@ const router = Router();
  */
 router.post("/login", (req, res) => {
   try {
-    
-    const userData = JSON.parse(fs.readFileSync('./data/user.json', 'utf8'));
+    const userData = JSON.parse(fs.readFileSync("./data/user.json", "utf8"));
     console.log(userData);
 
-    const _username = req.body['username'];
-    const _password = req.body['password'];
-    const list = userData['users'];
-    for (let i = 0; i < list.length; i++){
-      if (list[i].username === _username){
-        if (list[i].password !== _password){
+    const _username = req.body["username"];
+    const _password = req.body["password"];
+    const list = userData["users"];
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].username === _username) {
+        if (list[i].password !== _password) {
           return res.status(401).json({ message: "Wrong password" });
         }
-        return res.status(200).json({ message: "Login successful" });     
+        return res.status(200).json({ message: "Login successful" });
       }
     }
     return res.status(404).json({ message: "Username not exist" });

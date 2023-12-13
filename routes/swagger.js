@@ -21,6 +21,8 @@ const options = {
         description: "Locations",
       },
     ],
+    // schemes: ["http"],
+    // host: "localhost:5000",
     schemes: ["https"],
     host: "clis-swagger.onrender.com",
     basePath: "/api",
